@@ -1,0 +1,65 @@
+@startuml
+left to right direction
+
+Entity SistemaTienda{
+
+}
+
+Entity AgregarInstrumento{
+
+}
+
+Entity ConsultarInventario{
+}
+
+
+Entity InstrumentosDisponibles{
+Codigo
+Precio
+Instrumento
+Detalles
+}
+
+
+
+Entity VenderInstrumento{
+Codigo
+Stock
+
+}
+
+Entity Boleta{
+Instrumento Vendido
+Precio
+}
+
+Entity Cuerda{
+Nombre Instrumento
+Tipo de Cuerda
+Numero de Cuerdas
+Tipo
+Material
+}
+
+Entity Viento{
+Nombre Instrumento
+Material
+}
+
+Entity Percusion{
+Nombre Instrumento
+Tipo de Percusión
+Altura
+Material
+}
+
+AgregarInstrumento --- Cuerda
+AgregarInstrumento --- Percusion
+AgregarInstrumento --- Viento
+SistemaTienda --- AgregarInstrumento
+SistemaTienda --- VenderInstrumento
+SistemaTienda --- ConsultarInventario
+VenderInstrumento ...>"1" Boleta: Genera
+ConsultarInventario --- InstrumentosDisponibles
+
+@enduml

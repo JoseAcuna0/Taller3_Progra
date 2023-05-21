@@ -1,0 +1,148 @@
+@startuml
+left to right direction
+
+Abstract Class Instrument{
+-code: String
+-price: int
+-stock: int
+-material: String
+-name: String
++Instrument(code:String; price:int; stock:int; material:String; name:String)
++getCode(): String
++setCode(String code): void
++getPrice(): int
++setPrice(int price): void
++getStock(): int
++setStock(int stock): void
++getMaterial(): String
++setMaterial(material:String): void
++getName(): String
++setName(name:String): void
+}
+
+
+Class StringInstrument{
+-typeString: String
+-numberStrings: int
+-type: String
++StringInstrument(code:String; price:int; stock:int; material:String; name:String; typeString:String; numberStrings:int; type:String)
++toCSV(): String
++getTypeString(): String
++setTypeString(typeString:String): void
++getNumberStrings(): int
++setNumberStrings(int:numberStrings): void
++getType(): String
++setType(type:String): void
+}
+
+Class WindInstrument{
++WindInstrument(code:String; price:int; stock:int; material:String; name:String)
++toCSV(): String
+}
+
+Class PercussionInstrument{
+-typePercussion: String
+-heightDef: boolean
++PercussionInstrument(code:String; price:int; stock:int; material:String; name:String; typePercussion:String; heightDef:boolean)
++getHeight(): boolean
++toCSV(): String
++getTypePercussion(): String
++setTypePercussion(typePercussion:String): void
++setHeightDef(heightDef:boolean): void
+}
+
+Class StringList{
+-maxAmount: int
+-strAmount: int
+-stringList: StringInstrument[]
++StringLists(maxAmount:int)
++addInstrument(instrument:StringInstrument): void
++getMaxAmount(): int
++getStrAmount(): int
++getStringLists(): boolean
++ListToCSV(position:int): String
++sellS(code:String): void
+}
+
+Class WindList{
+-maxAmount: int
+-windAmount: int
+-windLists: WindInstrument[]
++WindList(maxAmount:int)
++addInstrument(instrument:WindInstrument): void
++getWindLists(): boolean
++ListToCSV(position:int): String
++getMaxAmount(): int
++getWindAmount(): int
++sellW(code:String): void
+}
+
+Class PercussionList{
+-maxAmount: int
+-percussionAmount: int
++PercussionLists: PercussionInstrument[]
++PercussionLists(maxAmount:int)
++addInstrument(instrument:PercussionInstrument): void
++getMaxAmount(): int
++getPercussionAmount(): int
++getPercussionLists(): boolean
++ListToCSV(): String
++sellP(code:String): void
+}
+
+Interface System{
++addInstrument(): boolean
++sellInstrument(): void
++consultInventory(): void
++exitMenu(value:boolean): void
+}
+
+Class Voucher{
+-instrumentSold: String
+-priceInstrumentSold: int
++Voucher(instrumentSold:String; priceInstrumentSold:int)
++getInstrumentSold(): String
++getPriceInstrumentSold(): int
+}
+
+Class SystemImpl{
++SystemImpl():
++main(): void
+}
+
+Class Inventory{
+-percussionList: PercussionList
+-windList: WindList
+-stringList: StringList
++Inventory():
++getInventory(): boolean
++readInventory(): void
++saveInventory(percussion:PercussionList,wind:WindList,string:StringList,inventoryOpen:boolean): void
++getPercussionList(): PercussionList
++getWindList(): WindList
++getStringList(): StringList
++sellWindInstrument(code:String): void
++sellStringInstrument(code:String): void
++sellPercussionInstrument(code:String): void
+}
+
+
+Instrument <|... StringInstrument
+Instrument <|... PercussionInstrument
+Instrument <|... WindInstrument
+StringInstrument <-- StringList
+WindInstrument <-- WindList
+PercussionInstrument <-- PercussionList
+Inventory -- StringList
+Inventory -- WindList
+Inventory -- PercussionList
+SystemImpl -- Inventory
+StringList --> Voucher
+PercussionList --> Voucher
+WindList --> Voucher
+System <|. SystemImpl: Implements
+
+
+
+
+@enduml

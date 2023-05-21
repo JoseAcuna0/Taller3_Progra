@@ -1,0 +1,106 @@
+@startuml
+left to right direction
+
+Abstract Class Instrument{
+#code: String
+#price: int
+#stock: int
+#material: String
+#name: String
++Instrument(code:String; price:int; stock:int; material:String; name:String)
++getCode(): String
++getPrice(): int
++getStock(): int
++getMaterial(): String
++getName(): String
+}
+
+
+Class StringInstrument{
+-typeString: String
+-numberStrings: int
+-type: String
++StringInstrument(code:String; price:int; stock:int; material:String; name:String; typeString:String; numberStrings:int; type:String)
++getTypeString(): String
++getNumberStrings(): int
++getType(): String
+}
+
+Class WindInstrument{
++WindInstrument(code:String; price:int; stock:int; material:String; name:String)
+}
+
+Class PercussionInstrument{
+-typePercussion: String
+-heightDef: boolean
++PercussionInstrument(code:String; price:int; stock:int; material:String; name:String; typePercussion:String; heightDef:boolean)
+}
+
+Class StringList{
+-maxAmount: int
+-initialAmount: int
+-StringList: StringInstrument[]
++StringLists(maxAmount:int)
+
+}
+
+Class WindList{
+-maxAmount: int
+-initialAmount: int
+-WindList: WindInstrument[]
++WindLists(maxAmount:int)
+}
+
+Class PercussionList{
+-maxAmount: int
+-initialAmount: int
+-PercussionList: PercussionInstrument[]
++PercussionLists(maxAmount:int)
+}
+
+Interface System{
++addInstrument():
++sellInstrument():
++lookInventory():
++exitSystem():
+}
+
+Class Voucher{
+-instrumentName: String
+-instrumentPrice: int
++Voucher(instrumentName:String; instrumentPrice:int)
+}
+
+Class SystemImpl{
+
++SystemImpl():
+}
+
+Class Inventory{
+-percussionList: PercussionList
+-windList: WindList
+-stringList: StringList
++Inventory():
++importInventory(): void
++searchInstrument(): Instrument
++saveInventory(): void
+}
+
+
+Instrument <|... StringInstrument
+Instrument <|... PercussionInstrument
+Instrument <|... WindInstrument
+StringInstrument <-- StringList
+WindInstrument <-- WindList
+PercussionInstrument <-- PercussionList
+Inventory -- StringList
+Inventory -- WindList
+Inventory -- PercussionList
+SystemImpl -- Inventory
+SystemImpl -- Voucher
+System <|. SystemImpl: Implements
+
+
+
+
+@enduml
